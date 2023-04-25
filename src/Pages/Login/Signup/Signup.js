@@ -39,8 +39,8 @@ const SignUp = () => {
 
     }
 
-    const saveUser = (name, email) => {
-        const user = { name, email };
+    const saveUser = (name, email, role) => {
+        const user = { name, email, };
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
@@ -59,7 +59,7 @@ const SignUp = () => {
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
-            <div className='w-96 p-7'>
+            <div className='w-96 p-7 bg-gray-800 shadow-2xl'>
                 <h2 className='text-xl text-center'>Sign Up</h2>
                 <form onSubmit={handleSubmit(handleSignUp)}>
                     <div className="form-control w-full max-w-xs">
@@ -85,12 +85,22 @@ const SignUp = () => {
                         })} className="input input-bordered w-full max-w-xs" />
                         {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                     </div>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label"> <span className="label-text">Select Account Type</span></label>
+                        <select
+                            {...register("role", {
+                                required: "Role is required",
+                            })}
+                            className="select input-bordered w-full max-w-xs">
+                            <option value="Buyer">Buyer</option>
+                            <option value="Seller">Seller</option>
+                        </select>
+                    </div>
                     <input className='btn btn-active btn-ghost w-full mt-4' value="Sign Up" type="submit" />
                     {signUpError && <p className='text-red-600'>{signUpError}</p>}
                 </form>
                 <p>Already have an account <Link className='text-secondary' to="/login">Please Login</Link></p>
-                <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+
 
             </div>
         </div>

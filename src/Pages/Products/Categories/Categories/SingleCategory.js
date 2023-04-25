@@ -6,7 +6,7 @@ const SingleCategory = ({ singleCategory, refetch }) => {
     const { name, pic, category } = singleCategory
 
     return (
-        <div>
+        <div className='bg-gray-700 shadow-2xl m-10 p-5'>
             <h1>Product Category : {category}</h1>
             <div className="card w-96 bg-base-100 shadow-xl image-full">
                 <figure><img src={pic} alt="Shoes" /></figure>

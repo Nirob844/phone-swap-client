@@ -8,9 +8,11 @@ import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { signIn } = useContext(AuthContext);
+    const { signIn, googleProviderLogin } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [loading, setLoading] = useState(true);
+
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -34,9 +36,41 @@ const Login = () => {
 
     }
 
+    const handleGoogleSignIn = () => {
+        setLoginError("");
+        googleProviderLogin()
+            .then((result) => {
+                const user = result.user;
+                setLoginUserEmail(user.email)
+                savedUser(user.displayName, user.email, 'Buyer')
+                toast.success("Login Success");
+                setLoading(false);
+
+            })
+            .catch(error => {
+                setLoginError(error.message);
+                setLoading(false);
+            });
+    };
+
+    const savedUser = (name, email, role) => {
+        const user = { name, email, role };
+        fetch(`${process.env.REACT_APP_API_URL}/users`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setLoginUserEmail(email);
+            });
+    };
+
     return (
         <div className='h-[800px] flex justify-center items-center'>
-            <div className='w-96 p-7'>
+            <div className='w-96 p-7 bg-gray-800 shadow-2xl'>
                 <h2 className='text-xl text-center'>Login</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>
                     <div className="form-control w-full max-w-xs">
@@ -64,7 +98,7 @@ const Login = () => {
                 </form>
                 <p>New to phone swap <Link className='text-secondary' to="/signup">Create new Account</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

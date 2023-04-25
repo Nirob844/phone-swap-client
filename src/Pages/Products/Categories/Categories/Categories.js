@@ -21,7 +21,7 @@ const Categories = () => {
     return (
         <div>
             <div className='category-container'>
-                <div className='bg-gray-800 w-3/4 shadow-2xl'>
+                <div className='bg-gray-800 w-3/4 shadow-2xl m-10'>
                     <p>all category : {categories.length}</p>
                     {
                         categories.map(allCategory => <Category

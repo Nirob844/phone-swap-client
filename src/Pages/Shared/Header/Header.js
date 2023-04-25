@@ -1,21 +1,31 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
+import { toast } from 'react-hot-toast';
 
 const Header = () => {
 
     const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                toast.success('logout successfull')
+            })
+
+            .catch(err => console.error(err));
+    }
 
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/products">Products</Link></li>
         <li><Link to="/blog">blog</Link></li>
         <li><Link to="/about">About</Link></li>
-        <li><Link to="/login">signIn</Link></li>
+
 
     </React.Fragment>
     const navbarEnd = <React.Fragment>
-        {user?.uid ?
+        {user?.email ?
             <>
                 <li className='lg:hidden'><button>Sign out</button></li>
                 <div className="dropdown dropdown-end">
@@ -23,9 +33,9 @@ const Header = () => {
                         <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
                     </label>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-32">
-                        <li><Link to="/slow-services">My service</Link></li>
-                        <li><Link to="/my-reviews">My review</Link></li>
-                        <li><button >Sign out</button></li>
+                        {/* <li><Link to="/slow-services">My service</Link></li>
+                        <li><Link to="/my-reviews">My review</Link></li> */}
+                        <li><button onClick={handleLogOut} >Sign out</button></li>
                     </ul>
                 </div>
             </>
@@ -38,7 +48,7 @@ const Header = () => {
 
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar bg-gray-800 shadow-2xl">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
