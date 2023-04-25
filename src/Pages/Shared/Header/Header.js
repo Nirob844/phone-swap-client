@@ -1,14 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
 
 const Header = () => {
+
+    const { user, logOut } = useContext(AuthContext);
 
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/products">Products</Link></li>
         <li><Link to="/blog">blog</Link></li>
         <li><Link to="/about">About</Link></li>
+        <li><Link to="/login">signIn</Link></li>
 
+    </React.Fragment>
+    const navbarEnd = <React.Fragment>
+        {user?.uid ?
+            <>
+                <li className='lg:hidden'><button>Sign out</button></li>
+                <div className="dropdown dropdown-end">
+                    <label tabIndex={0} className="">
+                        <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
+                    </label>
+                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-32">
+                        <li><Link to="/slow-services">My service</Link></li>
+                        <li><Link to="/my-reviews">My review</Link></li>
+                        <li><button >Sign out</button></li>
+                    </ul>
+                </div>
+            </>
+            :
+            <>
+                <li><Link to="/login">Sign in</Link></li>
+            </>
+        }
     </React.Fragment>
 
     return (
@@ -30,8 +55,10 @@ const Header = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <Link className="btn btn-ghost"> profile </Link>
+                <div className="navbar-end mr-5">
+                    <ul>
+                        {navbarEnd}
+                    </ul>
                 </div>
             </div>
         </div>

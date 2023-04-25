@@ -32,7 +32,7 @@ const Categories = () => {
                         </Category>)
                     }
                 </div>
-                <p>all product</p>
+
             </div>
 
         </div>

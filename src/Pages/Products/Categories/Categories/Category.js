@@ -12,7 +12,7 @@ const Category = ({ allCategory, refetch }) => {
 
     return (
         <div>
-            <Link to={`/products/${category}`} onClick={handleRefetch}><button className='btn btn-ghost'>{category}</button></Link>
+            <Link to={`/products/${category}`} onClick={() => handleRefetch(category)}><button className='btn btn-ghost'>{category}</button></Link>
         </div>
     );
 };

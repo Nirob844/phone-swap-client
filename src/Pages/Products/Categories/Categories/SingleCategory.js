@@ -3,10 +3,11 @@ import React from 'react';
 const SingleCategory = ({ singleCategory, refetch }) => {
 
 
-    const { name, seller, pic } = singleCategory
+    const { name, pic, category } = singleCategory
 
     return (
         <div>
+            <h1>Product Category : {category}</h1>
             <div className="card w-96 bg-base-100 shadow-xl image-full">
                 <figure><img src={pic} alt="Shoes" /></figure>
                 <div className="card-body">

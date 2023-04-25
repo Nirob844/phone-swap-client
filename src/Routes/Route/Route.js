@@ -4,6 +4,8 @@ import Home from "../../Pages/Home/Home/Home";
 import Products from "../../Pages/Products/Products/Products";
 import CategoryProducts from "../../Pages/Products/Categories/Categories/CategoryProducts";
 import CategoryLayout from "../../Layout/CategoryLayout";
+import Login from "../../Pages/Login/Login/Login";
+import SignUp from "../../Pages/Login/Signup/Signup";
 
 
 export const router = createBrowserRouter([
@@ -14,6 +16,14 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
+            },
+            {
+                path: "/login",
+                element: <Login />,
+            },
+            {
+                path: "/signup",
+                element: <SignUp />,
             },
 
         ],
