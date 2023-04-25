@@ -5,7 +5,7 @@ const Header = () => {
 
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/phones">Phones</Link></li>
+        <li><Link to="/products">Products</Link></li>
         <li><Link to="/blog">blog</Link></li>
         <li><Link to="/about">About</Link></li>
 

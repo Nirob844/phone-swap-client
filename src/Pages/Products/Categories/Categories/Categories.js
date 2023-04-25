@@ -17,9 +17,9 @@ const Categories = () => {
 
     return (
         <div>
-            <p>all category : {categories.length}</p>
             <div className='category-container'>
-                <div>
+                <div className='bg-gray-800 w-3/4 shadow-2xl'>
+                    <p>all category : {categories.length}</p>
                     {
                         categories.map(allCategory => <Category
                             key={allCategory._id}

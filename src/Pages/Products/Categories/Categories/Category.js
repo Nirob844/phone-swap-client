@@ -1,12 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 const Category = ({ allCategory }) => {
 
-    const { category, _id } = allCategory
+    const { category } = allCategory
 
     return (
         <div>
-            <p>{category}</p>
+            <Link to={`${category}`}><button className='btn btn-ghost'>{category}</button></Link>
         </div>
     );
 };
