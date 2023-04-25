@@ -3,6 +3,7 @@ import Main from "../../Layout/Main";
 import Home from "../../Pages/Home/Home/Home";
 import Products from "../../Pages/Products/Products/Products";
 import CategoryProducts from "../../Pages/Products/Categories/Categories/CategoryProducts";
+import CategoryLayout from "../../Layout/CategoryLayout";
 
 
 export const router = createBrowserRouter([
@@ -14,6 +15,13 @@ export const router = createBrowserRouter([
                 path: "/",
                 element: <Home />,
             },
+
+        ],
+    },
+    {
+        path: "/products",
+        element: <CategoryLayout />,
+        children: [
             {
                 path: "/products",
                 element: <Products />,
@@ -22,6 +30,6 @@ export const router = createBrowserRouter([
                 path: "/products/:category",
                 element: <CategoryProducts />,
             },
-        ],
+        ]
     }
 ]);

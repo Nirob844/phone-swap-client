@@ -2,13 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-const Category = ({ allCategory }) => {
+const Category = ({ allCategory, refetch }) => {
 
     const { category } = allCategory
+    const handleRefetch = () => {
+        refetch();
+
+    }
 
     return (
         <div>
-            <Link to={`${category}`}><button className='btn btn-ghost'>{category}</button></Link>
+            <Link to={`/products/${category}`} onClick={handleRefetch}><button className='btn btn-ghost'>{category}</button></Link>
         </div>
     );
 };

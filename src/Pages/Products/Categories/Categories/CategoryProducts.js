@@ -7,7 +7,7 @@ import SingleCategory from './SingleCategory';
 const CategoryProducts = () => {
 
     const { category } = useParams();
-    const { data: categoryProducts = [], isLoading } = useQuery({
+    const { data: categoryProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['categoryProducts'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/products/${category}`);
@@ -25,6 +25,7 @@ const CategoryProducts = () => {
                 categoryProducts.map(singleCategory => <SingleCategory
                     key={singleCategory._id}
                     singleCategory={singleCategory}
+                    refetch={refetch}
                 ></SingleCategory>)
             }
         </div>

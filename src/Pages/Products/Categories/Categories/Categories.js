@@ -2,10 +2,11 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import Category from './Category';
 import './Categories.css';
+import Loading from '../../../Shared/Loading/Loading';
 
 const Categories = () => {
 
-    const { data: categories = [] } = useQuery({
+    const { data: categories = [], refetch, isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/products/all-category');
@@ -13,7 +14,9 @@ const Categories = () => {
             return data
         }
     })
-
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <div>
@@ -24,6 +27,7 @@ const Categories = () => {
                         categories.map(allCategory => <Category
                             key={allCategory._id}
                             allCategory={allCategory}
+                            refetch={refetch}
                         >
                         </Category>)
                     }
