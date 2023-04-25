@@ -28,7 +28,7 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(data.name, data.email);
+                        saveUser(data.name, data.email, data.role);
                     })
                     .catch(err => console.log(err));
             })
@@ -40,7 +40,7 @@ const SignUp = () => {
     }
 
     const saveUser = (name, email, role) => {
-        const user = { name, email, };
+        const user = { name, email, role };
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
