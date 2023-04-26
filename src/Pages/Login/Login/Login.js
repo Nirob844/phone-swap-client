@@ -13,7 +13,7 @@ const Login = () => {
     const { signIn, googleProviderLogin } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
-    const [loading, setLoading] = useState(true);
+
 
 
     const googleProvider = new GoogleAuthProvider()
@@ -52,12 +52,11 @@ const Login = () => {
                 setLoginUserEmail(user.email)
                 savedUser(user.displayName, user.email, 'Buyer')
                 toast.success("Login Success");
-                setLoading(false);
 
             })
             .catch(error => {
                 setLoginError(error.message);
-                setLoading(false);
+
             });
     };
 

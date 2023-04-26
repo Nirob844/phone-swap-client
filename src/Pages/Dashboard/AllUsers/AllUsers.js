@@ -39,7 +39,7 @@ const AllUsers = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 if (data.deletedCount > 0) {
                     toast.success('Make admin successful.')
                     refetch();
@@ -61,7 +61,7 @@ const AllUsers = () => {
                             <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='bg-gray-700'>
                         {
                             users.map((user, i) => <tr key={user._id}>
                                 <th>{i + 1}</th>

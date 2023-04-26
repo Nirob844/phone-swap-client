@@ -12,6 +12,8 @@ import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import Blog from "../../Pages/Blog/Blog";
+import About from "../../Pages/About/About";
 
 
 export const router = createBrowserRouter([
@@ -22,6 +24,14 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
+            },
+            {
+                path: "/blog",
+                element: <Blog />,
+            },
+            {
+                path: "/about",
+                element: <About />,
             },
             {
                 path: "/login",

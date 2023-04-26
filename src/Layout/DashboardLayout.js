@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import Header from '../Pages/Shared/Header/Header';
 import { Link, Outlet } from 'react-router-dom';
-import Footer from '../Pages/Shared/Footer/Footer';
 import { AuthContext } from '../contexts/AuthContext/AuthContext';
 import { toast } from 'react-hot-toast';
 import useAdmin from '../hooks/useAdmin';
+
 
 const DashboardLayout = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -22,8 +22,8 @@ const DashboardLayout = () => {
         <div>
             <Header></Header>
             <div className='category-layout'>
-                <div>
-                    <ul className='my-20 mx-10 bg-gray-800 shadow-2xl p-1'>
+                <div className='bg-gray-900 shadow-2xl h-screen'>
+                    <ul className='my-20 mx-10  p-1'>
                         <li className='btn btn-ghost'><Link to="/dashboard">Dashboard</Link></li>
                         <li className='btn btn-ghost'><Link to="/dashboard/my-orders">My Orders</Link></li>
                         {
@@ -38,8 +38,6 @@ const DashboardLayout = () => {
                     <Outlet />
                 </div>
             </div>
-            <Footer></Footer>
-
         </div>
     );
 };
