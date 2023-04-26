@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
 import { GoogleAuthProvider } from 'firebase/auth';
+import useToken from '../../../hooks/userToken';
 
 
 
@@ -15,10 +16,16 @@ const Login = () => {
     const [loading, setLoading] = useState(true);
 
 
+    const googleProvider = new GoogleAuthProvider()
+    const [token] = useToken(loginUserEmail);
     const location = useLocation();
     const navigate = useNavigate();
-    const googleProvider = new GoogleAuthProvider()
+
     const from = location.state?.from?.pathname || '/';
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
 
     const handleLogin = data => {
@@ -56,7 +63,7 @@ const Login = () => {
 
     const savedUser = (name, email, role) => {
         const user = { name, email, role };
-        fetch(`${process.env.REACT_APP_API_URL}/users`, {
+        fetch('http://localhost:5000/users', {
             method: "POST",
             headers: {
                 "content-type": "application/json",
