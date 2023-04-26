@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 
 
@@ -16,7 +17,7 @@ const Login = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
-
+    const googleProvider = new GoogleAuthProvider()
     const from = location.state?.from?.pathname || '/';
 
 
@@ -38,7 +39,7 @@ const Login = () => {
 
     const handleGoogleSignIn = () => {
         setLoginError("");
-        googleProviderLogin()
+        googleProviderLogin(googleProvider)
             .then((result) => {
                 const user = result.user;
                 setLoginUserEmail(user.email)

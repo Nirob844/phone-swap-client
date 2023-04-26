@@ -6,6 +6,10 @@ import CategoryProducts from "../../Pages/Products/Categories/Categories/Categor
 import CategoryLayout from "../../Layout/CategoryLayout";
 import Login from "../../Pages/Login/Login/Login";
 import SignUp from "../../Pages/Login/Signup/Signup";
+import DashboardLayout from "../../Layout/DashboardLayout";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 
 
 export const router = createBrowserRouter([
@@ -39,6 +43,22 @@ export const router = createBrowserRouter([
             {
                 path: "/products/:category",
                 element: <CategoryProducts />,
+            },
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoutes>
+            <DashboardLayout />
+        </PrivateRoutes>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <Dashboard />
+            },
+            {
+                path: '/dashboard/my-orders',
+                element: <MyOrders />
             },
         ]
     }
