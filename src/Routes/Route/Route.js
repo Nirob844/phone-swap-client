@@ -14,6 +14,7 @@ import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import Blog from "../../Pages/Blog/Blog";
 import About from "../../Pages/About/About";
+import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 
 
 export const router = createBrowserRouter([
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/my-orders',
                 element: <MyOrders />
+            },
+            {
+                path: '/dashboard/add-product',
+                element: <AddProduct />
             },
             {
                 path: '/dashboard/all-users',
