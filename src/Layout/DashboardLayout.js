@@ -24,14 +24,14 @@ const DashboardLayout = () => {
             <div className='category-layout'>
                 <div>
                     <ul className='my-20 mx-10 bg-gray-800 shadow-2xl p-1'>
-                        <li><Link to="/dashboard">Dashboard</Link></li>
-                        <li><Link to="/dashboard/my-orders">My Orders</Link></li>
+                        <li className='btn btn-ghost'><Link to="/dashboard">Dashboard</Link></li>
+                        <li className='btn btn-ghost'><Link to="/dashboard/my-orders">My Orders</Link></li>
                         {
                             isAdmin && <>
-                                <li><Link to="/dashboard/all-users">All Users</Link></li>
+                                <li><Link className='btn btn-ghost' to="/dashboard/all-users">All Users</Link></li>
                             </>
                         }
-                        <li><button onClick={handleLogOut} >Sign out</button></li>
+                        <li className='btn btn-ghost'><button onClick={handleLogOut} >Sign out</button></li>
                     </ul>
                 </div>
                 <div>
