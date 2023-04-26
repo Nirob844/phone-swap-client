@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
 import { toast } from 'react-hot-toast';
+import useAdmin from '../../../hooks/useAdmin';
 
 const Header = () => {
 
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email)
 
     const handleLogOut = () => {
         logOut()
@@ -35,7 +37,11 @@ const Header = () => {
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-32">
                         <li><Link to="/dashboard">Dashboard</Link></li>
                         <li><Link to="/dashboard/my-orders">My Orders</Link></li>
-                        <li><Link to="/dashboard/all-users">All Users</Link></li>
+                        {
+                            isAdmin && <>
+                                <li><Link to="/dashboard/all-users">All Users</Link></li>
+                            </>
+                        }
                         <li><button onClick={handleLogOut} >Sign out</button></li>
                     </ul>
                 </div>

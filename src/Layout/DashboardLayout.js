@@ -4,9 +4,11 @@ import { Link, Outlet } from 'react-router-dom';
 import Footer from '../Pages/Shared/Footer/Footer';
 import { AuthContext } from '../contexts/AuthContext/AuthContext';
 import { toast } from 'react-hot-toast';
+import useAdmin from '../hooks/useAdmin';
 
 const DashboardLayout = () => {
-    const { logOut } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email)
 
     const handleLogOut = () => {
         logOut()
@@ -24,7 +26,11 @@ const DashboardLayout = () => {
                     <ul className='my-20 mx-10 bg-gray-800 shadow-2xl p-1'>
                         <li><Link to="/dashboard">Dashboard</Link></li>
                         <li><Link to="/dashboard/my-orders">My Orders</Link></li>
-                        <li><Link to="/dashboard/all-users">All Users</Link></li>
+                        {
+                            isAdmin && <>
+                                <li><Link to="/dashboard/all-users">All Users</Link></li>
+                            </>
+                        }
                         <li><button onClick={handleLogOut} >Sign out</button></li>
                     </ul>
                 </div>
