@@ -3,18 +3,33 @@ import React from 'react';
 const SingleCategory = ({ singleCategory, refetch }) => {
 
 
-    const { name, pic, category } = singleCategory
+    const { sellerName, image, date, model, condition, location, purchase, description, resellPrice, originalPrice } = singleCategory
 
     return (
-        <div className='bg-gray-700 shadow-2xl m-10 p-5'>
-            <h1>Product Category : {category}</h1>
-            <div className="card w-96 bg-base-100 shadow-xl image-full">
-                <figure><img src={pic} alt="Shoes" /></figure>
+        <div className=' m-5 '>
+            <div className="card lg:card-side bg-gray-900 shadow-xl">
+                <figure><img src={image} alt="Album" /></figure>
                 <div className="card-body">
-                    <h2 className="card-title">{name}</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
+                    <div className='flex justify-between'>
+                        <div>
+                            <h2 className="text-xl">Product Model : {model}</h2>
+                            <p>Condition : {condition}</p>
+                            <p>Seller : {sellerName}</p>
+                            <p>Used : {purchase}</p>
+                            <p>Description : {description}</p>
+                        </div>
+                        <div>
+                            <div>
+                                <p>Resell Price : {resellPrice}</p>
+                                <p>Original Price : {originalPrice}</p>
+                                <p>{location}</p>
+                                <p>{date}</p>
+                            </div>
+                            <div className='m-3'>
+                                <button className='btn btn-active btn-ghost'>Book Now</button>
+                                <button className='btn btn-active btn-ghost'>Wishlist</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

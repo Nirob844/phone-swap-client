@@ -20,7 +20,8 @@ const CategoryProducts = () => {
     }
 
     return (
-        <div>
+        <div className='grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2'>
+            <h1 className='text-2xl p-5 bg-gray-700 mt-5'>Product Category : {category}</h1>
             {
                 categoryProducts.map(singleCategory => <SingleCategory
                     key={singleCategory._id}
