@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import BookingModal from '../../BookingModal/BookingModal';
 
 const SingleCategory = ({ singleCategory, refetch }) => {
 
-
+    const [modal, setModal] = useState('')
     const { sellerName, image, date, model, condition, location, purchase, description, resellPrice, originalPrice } = singleCategory
 
     return (
@@ -26,8 +27,13 @@ const SingleCategory = ({ singleCategory, refetch }) => {
                                 <p>{date}</p>
                             </div>
                             <div className='m-3'>
-                                <button className='btn btn-active btn-ghost'>Book Now</button>
+                                <label htmlFor="booking-modal" className="btn btn-active btn-ghost">Book Now</label>
                                 <button className='btn btn-active btn-ghost'>Wishlist</button>
+                                <BookingModal
+                                    singleCategory={singleCategory}
+                                    setModal={setModal}
+                                    refetch={refetch}
+                                ></BookingModal>
                             </div>
                         </div>
                     </div>
