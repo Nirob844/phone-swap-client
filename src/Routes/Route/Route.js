@@ -16,6 +16,7 @@ import Blog from "../../Pages/Blog/Blog";
 import About from "../../Pages/About/About";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import SellerRoute from "../SellerRoute/SellerRoute";
+import MyProduct from "../../Pages/Dashboard/MyProduct/MyProduct";
 
 
 export const router = createBrowserRouter([
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/add-product',
                 element: <SellerRoute><AddProduct /></SellerRoute>
+            },
+            {
+                path: '/dashboard/my-product',
+                element: <SellerRoute><MyProduct /></SellerRoute>
             },
             {
                 path: '/dashboard/all-users',
