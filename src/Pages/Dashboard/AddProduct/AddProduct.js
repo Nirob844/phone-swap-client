@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ const AddProduct = () => {
 
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const date = new Date();
+    const date = new Date('pp');
     const navigate = useNavigate();
     const imageHostKey = process.env.REACT_APP_imgbb_key;
 

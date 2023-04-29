@@ -4,10 +4,11 @@ import { useQuery } from 'react-query';
 import { toast } from 'react-hot-toast';
 import Loading from '../../Shared/Loading/Loading';
 
+
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
-
-    const url = 'http://localhost:5000/bookings';
+    const url = `http://localhost:5000/product?email=${user?.email}`;
+    // console.log(url);
     const {
         data: products = [],
         isLoading,
@@ -26,27 +27,41 @@ const MyProduct = () => {
     });
 
     if (isLoading) {
-        <Loading />
+        return <Loading />
     }
-    const handleAdvertise = (_id) => {
-        fetch(`${process.env.REACT_APP_API_URL}/advertise/${_id}`, {
-            method: "PUT",
+    const handleAdvertise = (id) => {
+        fetch(`http://localhost:5000/product-advertise/${id}`, {
+            method: "PATCh",
             headers: {
                 authorization: `bearer ${localStorage.getItem("accessToken")}`,
             },
         })
             .then((res) => res.json())
             .then((data) => {
+                console.log(data);
                 if (data.acknowledged > 0) {
-                    toast.success("advertise added Successfully");
+                    toast.success("advertise Successfully");
                     refetch();
                 }
             });
     };
 
-    const handleDeleteUser = () => {
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/product-delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.deletedCount > 0) {
+                    toast.success("User deleted successfully");
+                    refetch();
+                }
+            });
+    };
 
-    }
     const handleStatus = () => {
 
     }
@@ -58,12 +73,11 @@ const MyProduct = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>list</th>
                             <th>Product</th>
                             <th>Price</th>
                             <th>Status</th>
-                            <th>Promoted</th>
-                            <th>Added</th>
+                            <th>Advertise</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -73,9 +87,13 @@ const MyProduct = () => {
                                 <th>{i + 1}</th>
                                 <td>{product.model}</td>
                                 <td>{product.price}</td>
-                                <td>{product?.role !== 'Seller' && <button onClick={() => handleStatus(user._id)} className='btn btn-xs btn-primary'>Available</button>}</td>
-                                <td>{product?.role !== 'Seller' && <button onClick={() => handleAdvertise(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
-                                <td><button onClick={() => handleDeleteUser(user._id)} className='btn btn-xs btn-danger'>Delete</button></td>
+                                <td> <button onClick={() => handleStatus(product._id)} className='btn btn-xs btn-primary'>Available</button></td>
+                                <td> {product.status === 'promoted' ? (<button className='btn btn-xs btn-primary'>Promoted</button>)
+                                    :
+                                    (
+                                        <button onClick={() => handleAdvertise(product._id)} className='btn btn-xs btn-primary'>ADS</button>
+                                    )}</td>
+                                <td><button onClick={() => handleDelete(product._id)} className='btn btn-xs btn-danger'>Delete</button></td>
                             </tr>)
                         }
 

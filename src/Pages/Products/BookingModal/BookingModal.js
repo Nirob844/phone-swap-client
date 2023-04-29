@@ -6,7 +6,7 @@ const BookingModal = ({ singleCategory, setModal, refetch }) => {
 
     const { user } = useContext(AuthContext);
     const { category, resellPrice, model, _id, image } = singleCategory;
-
+    const date = new Date('pp')
 
     const handleBooking = (e) => {
         //console.log("count");
@@ -17,6 +17,7 @@ const BookingModal = ({ singleCategory, setModal, refetch }) => {
         const price = form.price.value;
         const email = form.email.value;
         const phone = form.phone.value;
+        const date = form.date.value;
         const location = form.location.value;
         const booking = {
             pId: _id,
@@ -27,6 +28,7 @@ const BookingModal = ({ singleCategory, setModal, refetch }) => {
             model,
             location,
             image,
+            date
         };
         fetch('http://localhost:5000/bookings', {
             method: "POST",
@@ -92,6 +94,14 @@ const BookingModal = ({ singleCategory, setModal, refetch }) => {
                                 type="email"
                                 name="email"
                                 placeholder="Your Email"
+                                className="input input-bordered w-full"
+                            />
+                            <input
+                                defaultValue={date}
+                                disabled
+                                type="text"
+                                name="date"
+                                placeholder=""
                                 className="input input-bordered w-full"
                             />
                             <input
