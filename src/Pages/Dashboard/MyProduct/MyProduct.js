@@ -29,21 +29,25 @@ const MyProduct = () => {
     if (isLoading) {
         return <Loading />
     }
+
     const handleAdvertise = (id) => {
+        console.log(id);
         fetch(`http://localhost:5000/product-advertise/${id}`, {
-            method: "PATCh",
+            method: 'PUT',
             headers: {
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                if (data.acknowledged > 0) {
-                    toast.success("advertise Successfully");
+            .then(res => res.json())
+            .then(data => {
+                //  console.log(data);
+                if (data.modifiedCount > 0) {
+                    toast.success('Make promoted successful.')
                     refetch();
                 }
-            });
+            })
+
+
     };
 
     const handleDelete = (id) => {
